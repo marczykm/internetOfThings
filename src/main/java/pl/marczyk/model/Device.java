@@ -4,13 +4,12 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
-import java.util.List;
 
 /**
  * Created by MMARCZYK on 2015-10-27.
  */
 @Entity
-public class Room {
+public class Device {
 
     @Id
     @GeneratedValue
@@ -19,13 +18,14 @@ public class Room {
     @NotNull
     private String name;
 
-    @OneToMany(fetch = FetchType.LAZY, mappedBy = "room", cascade = CascadeType.ALL)
-    private List<Device> devices;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JsonIgnore
+    private Room room;
 
-    public Room() {
+    public Device() {
     }
 
-    public Room(String name) {
+    public Device(String name) {
         this.name = name;
     }
 
@@ -45,12 +45,12 @@ public class Room {
         this.name = name;
     }
 
-    public List<Device> getDevices() {
-        return devices;
+    public Room getRoom() {
+        return room;
     }
 
-    public void setDevices(List<Device> devices) {
-        this.devices = devices;
+    public void setRoom(Room room) {
+        this.room = room;
     }
 
     @Override
@@ -58,10 +58,10 @@ public class Room {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
 
-        Room room = (Room) o;
+        Device device = (Device) o;
 
-        if (id != null ? !id.equals(room.id) : room.id != null) return false;
-        return !(name != null ? !name.equals(room.name) : room.name != null);
+        if (id != null ? !id.equals(device.id) : device.id != null) return false;
+        return !(name != null ? !name.equals(device.name) : device.name != null);
 
     }
 
@@ -74,7 +74,7 @@ public class Room {
 
     @Override
     public String toString() {
-        return "Room{" +
+        return "Device{" +
                 "id=" + id +
                 ", name='" + name + '\'' +
                 '}';

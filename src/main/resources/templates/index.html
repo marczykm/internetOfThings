@@ -14,9 +14,17 @@
                 <h1>Rooms <small>Rooms configured in admin panel</small></h1>
             </div>
             <div class="panel-body">
-                <ul th:each="r : ${rooms}" class="nav nav-pills">
-                    <li role="presentation"><a th:text="${r.name}" href="#"></a></li>
-                </ul>
+                <div class="row">
+                    <div class="col-md-4 col-xs-12">
+                        <ul th:each="r : ${rooms}" class="nav nav-pills">
+                            <li role="presentation"><a class="room" th:attr="data-id=${r.id}" th:text="${r.name}" href="#"></a></li>
+                        </ul>
+                    </div>
+                    <div id="room-devices" class="col-md-8 col-xs-12">
+
+                    </div>
+                </div>
+
             </div>
         </div>
 
