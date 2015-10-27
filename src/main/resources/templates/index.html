@@ -14,7 +14,9 @@
                 <h1>Rooms <small>Rooms configured in admin panel</small></h1>
             </div>
             <div class="panel-body">
-
+                <ul th:each="r : ${rooms}" class="nav nav-pills">
+                    <li role="presentation"><a th:text="${r.name}" href="#"></a></li>
+                </ul>
             </div>
         </div>
 
