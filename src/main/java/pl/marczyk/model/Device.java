@@ -18,6 +18,10 @@ public class Device {
     @NotNull
     private String name;
 
+    @NotNull
+    @Enumerated(EnumType.STRING)
+    private Type type;
+
     @ManyToOne(fetch = FetchType.LAZY)
     @JsonIgnore
     private Room room;
@@ -43,6 +47,14 @@ public class Device {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public Type getType() {
+        return type;
+    }
+
+    public void setType(Type type) {
+        this.type = type;
     }
 
     public Room getRoom() {
@@ -78,5 +90,9 @@ public class Device {
                 "id=" + id +
                 ", name='" + name + '\'' +
                 '}';
+    }
+
+    enum Type {
+        SWITCH
     }
 }
